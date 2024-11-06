@@ -4,23 +4,20 @@
 #
 
 # 1. Input
-weight = float(input('Enter your weight in kilograms? '))
-height = float(input('Enter your height in kilograms? '))
-counter = 1
+while True:
+
+    weight = float(input('Enter your weight in kilograms? '))
+    height = float(input('Enter your height in meters? '))
 
 # 2. Process
-BMI = weight / height**2 
+    BMI = weight / height**2 
 
 # 3. Output
 
-print(f'Your BMi is : {BMI}')
+    print(f'Your BMi is : {BMI}')
 
 # Loop
 
-answer = (input(f'Continue?(yes/no): '))
-if answer == 'no':
-    break
- 
-
-
-
+    answer = input('Continue?(yes/no): ')
+    if answer == 'no':
+        break

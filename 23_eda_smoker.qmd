@@ -1,0 +1,54 @@
+---
+title: 'EDA'
+author: 'Hansen'
+format: revealjs
+---
+
+## Load data
+
+
+```{python}
+import pandas as pd
+dataset = pd.read_csv('smoker.csv')
+```
+
+## Inspect structure
+
+
+```{python}
+dataset.shape
+```
+
+
+```{python}
+dataset.info()
+```
+
+## Inspect Value
+
+```{python}
+dataset.head()
+```
+
+---
+
+```{python}
+dataset.tail()
+```
+
+## Statistic
+
+
+```{python}
+dataset.describe(). round(2)
+```
+
+## Histogram
+
+
+```{python}
+import matplotlib.pyplot as plt
+dataset = pd.read_csv('smoker.csv'). hist()
+plt.show()
+```
+

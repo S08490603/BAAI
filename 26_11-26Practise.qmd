@@ -1,0 +1,185 @@
+---
+title: 'Data Analysis'
+author: 'Hansen'
+institute: 'Tunghai University'
+toc: true 
+number-sections: true
+execute:
+    daemon: true
+format: 
+    html: 
+        embed-resources: true
+---
+
+## Keypoints
+
+- Data loading 
+- Data inspection
+    - Structure
+    - Value
+- Data Cleaning
+    - Dealing with missing data
+    - Detecint outliers
+- Data transformation
+    - Encoding
+
+
+## Load Dataset
+
+Load dataset from CSV file into `df` using Pandas package.
+
+```{python}
+import pandas as pd
+df = pd.read_csv('customer_data.csv')
+```
+
+- Where is `customer_data.csv`?
+
+## Data Inspection
+
+- Structure
+    - Dimension of dataset
+    - Column data type
+- Value
+    - Missing value
+    - Outliers
+
+
+### Dimension of dataset
+
+- How many rows and columns?
+
+`df.shape`
+
+(10, 4)
+
+### Column data type
+
+```{python}
+df.info()
+```
+
+## Check first few rows
+
+```{python}
+df.head()
+```
+
+## Check last few rows
+
+```{python}
+df.tail()
+```
+
+## Basic statistics
+
+
+```{python}
+df.describe()
+```
+
+## Round to 2 decimal points
+
+```{python}
+df.describe().round(2)
+```
+
+## Dataset
+
+```{python}
+#| echo: false
+df
+```
+
+Any potential issues in this dataset?
+
+## Visualisation
+
+```{python}
+import matplotlib.pylab as plt
+df['Age'].hist()
+plt.show()
+```
+
+## Correlation among colmuns
+
+
+```{python}
+df.plot.scatter(x = 'Age', y = 'Income')
+plt.show()
+# import seaborn as sns
+# sns.pairplot(df)
+```
+
+## Data Clearning
+
+- Removing duplicates
+
+```{python}
+df = df.drop_duplicates(subset='CustomerID')
+```
+
+- Fixing incorrect values
+
+```{python}
+import numpy as np
+
+df.loc[(df['Age'] < 18) | (df['Age'] > 65), 'Age'] = np.nan
+```
+
+## Dealing with Missing Data
+
+- Imputing
+
+```{python}
+df.loc[df['Age'].isna(), 'Age'] = df['Age'].median()
+df.loc[df['Income'].isna(), 'Income'] = df['Income'].mean()
+```
+
+- Removing
+
+```{python}
+df = df.dropna(subset=['Gender'])
+```
+
+## Outlier Detection and Treatment
+
+- Identifying and addressing outliers
+
+```{python}
+Q1 = df['Income'].quantile(0.25)
+Q3 = df['Income'].quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+df.loc[df['Income'] > upper_bound, 'Income'] = upper_bound
+df.loc[df['Income'] < upper_bound, 'Income'] = lower_bound
+```
+
+## Data Transformation
+
+## Normalizing: 0 ≤ x ≤ 1
+
+
+
+## Standardizing: mean=0, sd=1
+
+## Before encoding
+
+```{python}
+#| echo: false
+df 
+```
+
+## Encoding: M->0, F->1
+
+```{python}
+df.loc[:,'Gender_encoded'] = df['Gender'].map({'M': 0, 'F': 1})
+```
+
+## After encoding
+
+```{python}
+df
+```

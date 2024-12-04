@@ -1,0 +1,86 @@
+---
+title: 'Viz-Visualisation'
+author: 'Hansen'
+institute: 'Tunghai University'
+toc: true 
+number-sections: false
+format: 
+    html: 
+        embed-resources: true
+---
+
+```{python}
+import pandas as pd
+df = pd.read_csv('smoker.csv')
+df
+```
+
+## Histogram
+
+```{python}
+df['smoker'].hist()
+```
+
+## All variables
+
+```{python}
+df.hist()
+```
+
+## Data loading
+
+```{python}
+import pandas as pd
+df = pd.read_csv('smoker.csv')
+df
+```
+
+## Line chart
+
+# One Variable
+
+```{python}
+df['treatment'].plot()
+```
+
+# All Variables
+
+```{python}
+df.plot()
+```
+
+# All Variables, log scale for y axis
+
+```{python}
+df.plot(logy = True)
+```
+
+## Scatter Plot
+
+## Two Variables
+
+### Method 1
+
+```{python}
+df.plot(kind='scatter', x = 'treatment', y = 'outcome')
+```
+
+
+### Method 2
+
+```{python}
+df.plot.scatter(x = 'treatment', y = 'outcome')
+```
+
+## All variables
+### Dataset
+
+```{python}
+import seaborn as sns
+df = sns.load_dataset("iris") 
+df
+```
+
+```{python}
+sns.pairplot(df, hue = 'species')
+```

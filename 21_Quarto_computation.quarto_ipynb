@@ -1,0 +1,102 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Quarto Computations\n",
+        "jupyter: python3\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## NumPy\n"
+      ],
+      "id": "3478d7b8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "a = np.arange(15).reshape(3, 5)\n",
+        "a"
+      ],
+      "id": "b0b7199a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Matplotlib\n"
+      ],
+      "id": "095990f1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "fig = plt.figure()\n",
+        "x = np.arange(10)\n",
+        "y = 2.5 * np.sin(x / 20 * np.pi)\n",
+        "yerr = np.linspace(0.05, 0.2, 10)\n",
+        "\n",
+        "plt.errorbar(x, y + 3, yerr=yerr, label='both limits (default)')\n",
+        "plt.errorbar(x, y + 2, yerr=yerr, uplims=True, label='uplims=True')\n",
+        "plt.errorbar(x, y + 1, yerr=yerr, uplims=True, lolims=True,\n",
+        "             label='uplims=True, lolims=True')\n",
+        "\n",
+        "upperlimits = [True, False] * 5\n",
+        "lowerlimits = [False, True] * 5\n",
+        "plt.errorbar(x, y, yerr=yerr, uplims=upperlimits, lolims=lowerlimits,\n",
+        "             label='subsets of uplims and lolims')\n",
+        "\n",
+        "plt.legend(loc='lower right')\n",
+        "plt.show(fig)"
+      ],
+      "id": "3b02c580",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Plotly\n"
+      ],
+      "id": "cdb7bd5e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import plotly.express as px\n",
+        "import plotly.io as pio\n",
+        "gapminder = px.data.gapminder()\n",
+        "gapminder2007 = gapminder.query(\"year == 2007\")\n",
+        "fig = px.scatter(gapminder2007, \n",
+        "                 x=\"gdpPercap\", y=\"lifeExp\", color=\"continent\", \n",
+        "                 size=\"pop\", size_max=60,\n",
+        "                 hover_name=\"country\")\n",
+        "fig.show()"
+      ],
+      "id": "ea908ebc",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python312\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
